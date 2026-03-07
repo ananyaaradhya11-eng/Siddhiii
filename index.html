@@ -18,18 +18,18 @@ height:100vh;
 overflow:hidden;
 }
 
-/* floating balloons */
+/* butterflies */
 
-.balloon{
+.butterfly{
 position:absolute;
-bottom:-120px;
-font-size:40px;
-animation:float 10s linear infinite;
+font-size:28px;
+animation:fly 12s linear infinite;
+opacity:0.8;
 }
 
-@keyframes float{
-0%{transform:translateY(0)}
-100%{transform:translateY(-120vh)}
+@keyframes fly{
+0%{transform:translateY(100vh) translateX(0)}
+100%{transform:translateY(-20vh) translateX(40px)}
 }
 
 /* card */
@@ -113,13 +113,13 @@ cursor:pointer;
 <body>
 
 
-<!-- floating balloons -->
+<!-- butterflies -->
 
-<div class="balloon" style="left:10%">🎈</div>
-<div class="balloon" style="left:30%">🎈</div>
-<div class="balloon" style="left:50%">🎈</div>
-<div class="balloon" style="left:70%">🎈</div>
-<div class="balloon" style="left:90%">🎈</div>
+<div class="butterfly" style="left:10%">🦋</div>
+<div class="butterfly" style="left:30%">🦋</div>
+<div class="butterfly" style="left:50%">🦋</div>
+<div class="butterfly" style="left:70%">🦋</div>
+<div class="butterfly" style="left:90%">🦋</div>
 
 
 <div class="card">
@@ -214,4 +214,3 @@ nextPage(4);
 </body>
 
 </html>
-```
