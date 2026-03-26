@@ -90,6 +90,46 @@ font-size:80px;
 cursor:pointer;
 }
 
+/* slider */
+
+.slider{
+width:220px;
+overflow:hidden;
+margin:auto;
+}
+
+/* slides */
+
+.slides{
+display:flex;
+transition:0.4s;
+}
+
+/* message cards */
+
+.slide{
+min-width:220px;
+height:220px;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+font-size:16px;
+color:#6b5ca5;
+background:#fff;
+border-radius:20px;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+margin-right:10px;
+}
+
+/* optional video */
+
+video{
+border-radius:15px;
+margin-bottom:15px;
+}
+
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
@@ -99,7 +139,6 @@ cursor:pointer;
 <body>
 
 <div class="card">
-
 
 <!-- PAGE 1 -->
 
@@ -115,7 +154,6 @@ cursor:pointer;
 
 </div>
 
-
 <!-- PAGE 2 -->
 
 <div class="page" id="page2">
@@ -128,7 +166,6 @@ cursor:pointer;
 
 </div>
 
-
 <!-- PAGE 3 -->
 
 <div class="page" id="page3">
@@ -139,10 +176,43 @@ cursor:pointer;
 
 </div>
 
+<!-- PAGE 4 (SLIDING CARDS) -->
+
+<div class="page" id="page4">
+
+<h1>For You 💖</h1>
+<p style="font-size:12px;color:#888;">(Swipe ➜)</p>
+
+<!-- OPTIONAL VIDEO -->
+<video width="220" controls>
+<source src="video.mp4" type="video/mp4">
+</video>
+
+<div class="slider">
+
+<div class="slides" id="slides">
+
+<div class="slide">💌 You are the sweetest person ever</div>
+
+<div class="slide">🌸 You make everything brighter</div>
+
+<div class="slide">✨ I’m so lucky to have you</div>
+
+<div class="slide">🎀 Stay cute, happy & amazing always</div>
+
+<div class="slide">💖 Love you sooo much bbggg</div>
+
+</div>
+
+</div>
+
+<button onclick="nextPage(5)">Open Final Message 💌</button>
+
+</div>
 
 <!-- FINAL PAGE -->
 
-<div class="page" id="page4">
+<div class="page" id="page5">
 
 <div class="bear">🧸💖</div>
 
@@ -161,16 +231,16 @@ and all the things you love the most ✨
 
 </div>
 
-
 <script>
 
+/* page switch */
+
 function nextPage(n){
-
 document.querySelector(".active").classList.remove("active");
-
 document.getElementById("page"+n).classList.add("active");
-
 }
+
+/* gift */
 
 function openGift(){
 
@@ -181,12 +251,45 @@ spread:120
 
 setTimeout(()=>{
 nextPage(4);
+initSlider();
 },800);
+
+}
+
+/* swipe */
+
+function initSlider(){
+
+let slides = document.getElementById("slides");
+let index = 0;
+let startX = 0;
+
+slides.addEventListener("touchstart", function(e){
+startX = e.touches[0].clientX;
+});
+
+slides.addEventListener("touchend", function(e){
+
+let endX = e.changedTouches[0].clientX;
+
+if(startX - endX > 50){
+index++;
+}
+
+if(endX - startX > 50){
+index--;
+}
+
+if(index < 0) index = 0;
+if(index > 4) index = 4;
+
+slides.style.transform = "translateX(-" + (index*230) + "px)";
+
+});
 
 }
 
 </script>
 
 </body>
-
 </html>
