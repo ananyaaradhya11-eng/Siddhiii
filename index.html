@@ -18,7 +18,7 @@ height:100vh;
 overflow:hidden;
 }
 
-/* card */
+/* main card */
 
 .card{
 background:white;
@@ -70,7 +70,7 @@ font-size:70px;
 margin-bottom:10px;
 }
 
-/* cake animation */
+/* cake */
 
 .cake{
 font-size:90px;
@@ -95,6 +95,35 @@ cursor:pointer;
 video{
 border-radius:15px;
 margin-top:10px;
+}
+
+/* mini cards */
+
+.card-container{
+display:flex;
+justify-content:center;
+gap:10px;
+margin-top:20px;
+}
+
+.mini-card{
+width:80px;
+height:80px;
+background:#f3e8ff;
+border-radius:15px;
+display:flex;
+align-items:center;
+justify-content:center;
+cursor:pointer;
+box-shadow:0 5px 10px rgba(0,0,0,0.1);
+font-size:14px;
+color:#6b5ca5;
+transition:0.3s;
+}
+
+.mini-card:hover{
+transform:scale(1.05);
+background:#e6d6ff;
 }
 
 </style>
@@ -143,7 +172,7 @@ margin-top:10px;
 
 </div>
 
-<!-- PAGE 4 (UPDATED) -->
+<!-- PAGE 4 -->
 
 <div class="page" id="page4">
 
@@ -161,7 +190,7 @@ margin-top:10px;
 
 </div>
 
-<!-- FINAL PAGE -->
+<!-- FINAL PAGE WITH TAP CARDS -->
 
 <div class="page" id="page5">
 
@@ -169,12 +198,17 @@ margin-top:10px;
 
 <h1>Lots of Love for You!</h1>
 
-<p>
-Happy Birthday Siddhi 🎉<br><br>
-I hope this little surprise made you smile bbggg.<br>
-May your day be filled with happiness, laughter<br>
-and all the things you love the most ✨
-</p>
+<p>Tap the cards 💌</p>
+
+<div class="card-container">
+
+<div class="mini-card" onclick="showMsg(1)">Tap me 💌</div>
+<div class="mini-card" onclick="showMsg(2)">Tap me 💌</div>
+<div class="mini-card" onclick="showMsg(3)">Tap me 💌</div>
+
+</div>
+
+<p id="messageBox" style="margin-top:20px; color:#6b5ca5;"></p>
 
 <button onclick="location.reload()">Replay 🔁</button>
 
@@ -203,6 +237,28 @@ spread:120
 setTimeout(()=>{
 nextPage(4);
 },800);
+
+}
+
+/* messages */
+
+function showMsg(n){
+
+let msg = "";
+
+if(n==1){
+msg = "💖 You mean so much to me";
+}
+
+if(n==2){
+msg = "🌸 You make life more beautiful";
+}
+
+if(n==3){
+msg = "✨ Stay happy always bbggg";
+}
+
+document.getElementById("messageBox").innerHTML = msg;
 
 }
 
