@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html>
 
@@ -70,10 +71,11 @@ font-size:70px;
 margin-bottom:10px;
 }
 
-/* cake animation */
+/* cake */
 
 .cake{
 font-size:90px;
+cursor:pointer;
 animation:bounce 2s infinite;
 }
 
@@ -81,6 +83,20 @@ animation:bounce 2s infinite;
 0%{transform:translateY(0)}
 50%{transform:translateY(-15px)}
 100%{transform:translateY(0)}
+}
+
+/* hearts */
+
+.heart{
+position:fixed;
+font-size:20px;
+color:#ff8fcf;
+animation:floatUp 3s linear forwards;
+}
+
+@keyframes floatUp{
+0%{transform:translateY(0); opacity:1;}
+100%{transform:translateY(-200px); opacity:0;}
 }
 
 /* gift */
@@ -100,7 +116,6 @@ cursor:pointer;
 
 <div class="card">
 
-
 <!-- PAGE 1 -->
 
 <div class="page active" id="page1">
@@ -116,15 +131,15 @@ cursor:pointer;
 </div>
 
 
-<!-- PAGE 2 -->
+<!-- PAGE 2 (CANDLE + CAKE) -->
 
 <div class="page" id="page2">
 
-<h1>Make a Wish 🎂</h1>
+<h1>Blow the Candle 🕯️</h1>
 
-<div class="cake">🎂</div>
+<div class="cake" onclick="blowCandle()">🎂🕯️</div>
 
-<button onclick="nextPage(3)">Next ➜</button>
+<p id="cutText" style="margin-top:10px;color:#888;"></p>
 
 </div>
 
@@ -150,7 +165,7 @@ cursor:pointer;
 
 <p>
 Happy Birthday Siddhi 🎉<br><br>
-I hope this little surprise made you smile bbggg.<br>
+I hope this little surprise made you smile, bbg 💖.<br>
 May your day be filled with happiness, laughter<br>
 and all the things you love the most ✨
 </p>
@@ -164,13 +179,69 @@ and all the things you love the most ✨
 
 <script>
 
+// page switch
+
 function nextPage(n){
-
 document.querySelector(".active").classList.remove("active");
-
 document.getElementById("page"+n).classList.add("active");
+}
+
+
+// candle blow → then cake cut
+
+function blowCandle(){
+
+let cake = document.querySelector(".cake");
+
+// remove candle
+cake.innerHTML = "🎂";
+
+document.getElementById("cutText").innerHTML = "Now cut the cake 🎂";
+
+// next click cuts cake
+cake.onclick = cutCake;
 
 }
+
+
+// cake cut with hearts
+
+function cutCake(){
+
+let cake = document.querySelector(".cake");
+
+// cake becomes slice
+cake.innerHTML = "🍰";
+
+document.getElementById("cutText").innerHTML = "Yay! Cake cut 🎉";
+
+// hearts animation
+for(let i=0;i<20;i++){
+
+let heart = document.createElement("div");
+heart.className = "heart";
+heart.innerHTML = "💖";
+
+heart.style.left = Math.random()*300 + "px";
+heart.style.top = "50%";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},3000);
+
+}
+
+// move next
+setTimeout(()=>{
+nextPage(3);
+},1500);
+
+}
+
+
+// gift open
 
 function openGift(){
 
@@ -190,3 +261,4 @@ nextPage(4);
 </body>
 
 </html>
+```
